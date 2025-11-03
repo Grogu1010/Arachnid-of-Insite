@@ -14,17 +14,19 @@ web-of-knowledge/
     ├── data/
     │   └── knowledge.js        # Seed questions and character fingerprints
     ├── game.js                 # Client-side inference + UI orchestration
-    ├── index.html              # Application shell
+    ├── index.html              # Application shell for Netlify deploys
     └── style.css               # Frosted-glass inspired styling
+
+The repository root also contains an `index.html` that wires the same shell to the module-based assets for offline use.
 ```
 
 ## Getting started
 
-1. Install dependencies for local development (a static server is enough):
+1. Open `index.html` in your browser, or serve the repository root with any static file server if you prefer a local URL:
 
    ```bash
-   npm install -g serve # or any static file server you prefer
-   serve web-of-knowledge/src
+   python3 -m http.server 3000
+   # then visit http://localhost:3000/
    ```
 
 2. In Netlify, configure the required environment variables so the logging function can commit to GitHub:
