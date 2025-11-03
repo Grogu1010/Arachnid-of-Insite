@@ -21,19 +21,18 @@ const ui = {
   questionCounter: $("#question-counter"),
   guessCounter: $("#guess-counter"),
   buttons: $$(".game__actions .btn"),
-  guessArea: $("#guess-area"),
-  guessText: $("#guess-text"),
   guessCorrect: $("#guess-correct"),
   guessIncorrect: $("#guess-incorrect"),
-  summary: $("#summary"),
-  submitButton: $("#submit-session"),
   submitStatus: $("#submit-status"),
+  revealContinue: $("#reveal-continue"),
+  finishButton: $("#finish-session"),
   revealForm: $("#reveal-form"),
   newCharacterForm: $("#new-character-form"),
   newQuestionForm: $("#new-question-form"),
   newCharacterAnswers: $("#new-character-answers"),
   newQuestionCharacters: $("#new-question-characters"),
-  optionTemplate: $("#option-template")
+  optionTemplate: $("#option-template"),
+  flowStages: $$(".flow__stage")
 };
 
 const state = {
@@ -48,6 +47,13 @@ const state = {
   correct: null,
   revealedGuess: null
 };
+
+function showStage(stageId) {
+  ui.flowStages.forEach((stage) => {
+    const active = stage.id === stageId;
+    stage.hidden = !active;
+  });
+}
 
 async function loadKnowledge() {
   try {
@@ -164,7 +170,7 @@ function askNextQuestion() {
   ui.narration.textContent = "Answer truthfully; every strand matters.";
   updateCounters();
   enableAnswerButtons();
-  ui.guessArea.hidden = true;
+  showStage("step-question");
 }
 
 function topCandidateProbability() {
@@ -241,9 +247,8 @@ function requestGuess() {
   }
 
   state.currentGuess = guess;
-  ui.guessText.textContent = `The Spider believes you ponder ${guess.name}. Is it correct?`;
-  ui.guessArea.hidden = false;
-  ui.question.textContent = "";
+  ui.question.textContent = `The Spider believes you ponder ${guess.name}. Is it correct?`;
+  showStage("step-guess");
   ui.narration.textContent = "Answer carefully; the Spider commits this to the Web.";
 }
 
@@ -305,12 +310,11 @@ function concludeGame(correctCharacter) {
   state.gameOver = true;
   state.correct = Boolean(correctCharacter);
   state.revealedGuess = correctCharacter?.name || null;
-  ui.guessArea.hidden = true;
-  ui.summary.hidden = false;
+  showStage("step-reveal");
 
   if (correctCharacter) {
-    ui.question.textContent = `The web prevailed! ${correctCharacter.name} was captured.`;
-    ui.narration.textContent = "Confirm their identity and share new strands if you wish.";
+    ui.question.textContent = `The web prevailed! Confirm ${correctCharacter.name}'s identity.`;
+    ui.narration.textContent = "Share who you were thinking of before weaving new strands.";
     ui.revealForm.elements.namedItem("revealedName").value = correctCharacter.name;
   } else {
     ui.question.textContent =
@@ -354,8 +358,9 @@ async function submitSession() {
     }
   };
 
-  ui.submitButton.disabled = true;
+  ui.finishButton.disabled = true;
   ui.submitStatus.textContent = "Sending strands to the Web of Knowledge…";
+  ui.question.textContent = "The Spider weaves your answers into the Web of Knowledge…";
 
   try {
     const res = await fetch("/.netlify/functions/submit", {
@@ -369,12 +374,16 @@ async function submitSession() {
     }
 
     ui.submitStatus.textContent = "The Spider thanks you. Your insights are woven into the web.";
+    ui.narration.textContent = "Another tale captured. The web grows stronger.";
+    ui.question.textContent = "Session complete.";
   } catch (error) {
     console.error(error);
     ui.submitStatus.textContent =
       "The web shuddered while saving your insights. Please try again in a moment.";
+    ui.finishButton.disabled = false;
+    ui.question.textContent = "The strands slipped. Try sending them once more.";
   } finally {
-    ui.submitButton.disabled = false;
+    // Keep disabled on success so the insights aren't resent.
   }
 }
 
@@ -389,7 +398,15 @@ function bindEvents() {
 
   ui.guessCorrect.addEventListener("click", () => handleGuessResult(true));
   ui.guessIncorrect.addEventListener("click", () => handleGuessResult(false));
-  ui.submitButton.addEventListener("click", (event) => {
+  ui.revealContinue.addEventListener("click", (event) => {
+    event.preventDefault();
+    showStage("step-suggest");
+    ui.question.textContent = "Suggest new threads for the Web of Knowledge.";
+    ui.narration.textContent =
+      "Leave the fields blank if you wish—the Spider will still receive your session.";
+  });
+
+  ui.finishButton.addEventListener("click", (event) => {
     event.preventDefault();
     submitSession();
   });

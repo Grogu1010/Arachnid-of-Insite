@@ -56,16 +56,12 @@ body {
   font-size: 1.1rem;
 }
 
-.game,
-.summary {
+.game {
   background: var(--bg-card);
   border-radius: 24px;
   padding: 2rem;
   box-shadow: 0 1.2rem 3rem -1.5rem var(--shadow);
   backdrop-filter: blur(16px);
-}
-
-.game {
   display: grid;
   gap: 1.5rem;
 }
@@ -93,7 +89,8 @@ body {
   min-height: 3.4rem;
 }
 
-.game__actions {
+.game__actions,
+.guess__actions {
   display: flex;
   gap: 1rem;
   justify-content: center;
@@ -134,21 +131,19 @@ body {
   font-style: italic;
 }
 
-.guess {
-  display: grid;
-  gap: 1rem;
-  text-align: center;
-}
-
-.guess__actions {
-  display: flex;
-  gap: 1rem;
-  justify-content: center;
-}
-
-.summary {
+.flow {
   display: grid;
   gap: 1.5rem;
+}
+
+.flow__stage {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.flow__next {
+  justify-self: center;
+  padding-inline: 2.5rem;
 }
 
 .card {
@@ -204,11 +199,6 @@ select:focus {
 .field__grid {
   display: grid;
   gap: 0.65rem;
-}
-
-.summary__submit {
-  justify-self: center;
-  padding-inline: 2.5rem;
 }
 
 .summary__status {
