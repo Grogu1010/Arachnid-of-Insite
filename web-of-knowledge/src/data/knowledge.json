@@ -1,0 +1,131 @@
+{
+  "questions": [
+    {
+      "id": "real",
+      "text": "Is your character a real person?",
+      "category": "existence"
+    },
+    {
+      "id": "human",
+      "text": "Is your character human?",
+      "category": "species"
+    },
+    {
+      "id": "heroic",
+      "text": "Is your character generally considered a hero?",
+      "category": "morality"
+    },
+    {
+      "id": "powers",
+      "text": "Does your character possess supernatural abilities?",
+      "category": "abilities"
+    },
+    {
+      "id": "franchise",
+      "text": "Is your character part of a large media franchise?",
+      "category": "media"
+    },
+    {
+      "id": "tech",
+      "text": "Is advanced technology important to your character?",
+      "category": "traits"
+    },
+    {
+      "id": "historical",
+      "text": "Was your character alive before the year 1900?",
+      "category": "time"
+    },
+    {
+      "id": "animated",
+      "text": "Is your character primarily seen in animated works?",
+      "category": "media"
+    },
+    {
+      "id": "mask",
+      "text": "Is your character known for wearing a distinctive mask or helmet?",
+      "category": "appearance"
+    }
+  ],
+  "characters": [
+    {
+      "id": "spider-man",
+      "name": "Spider-Man",
+      "description": "Marvel superhero Peter Parker",
+      "answers": {
+        "real": "no",
+        "human": "yes",
+        "heroic": "yes",
+        "powers": "yes",
+        "franchise": "yes",
+        "tech": "maybe",
+        "historical": "no",
+        "animated": "maybe",
+        "mask": "yes"
+      }
+    },
+    {
+      "id": "hermione-granger",
+      "name": "Hermione Granger",
+      "description": "Wizarding World heroine",
+      "answers": {
+        "real": "no",
+        "human": "yes",
+        "heroic": "yes",
+        "powers": "yes",
+        "franchise": "yes",
+        "tech": "no",
+        "historical": "no",
+        "animated": "no",
+        "mask": "no"
+      }
+    },
+    {
+      "id": "albert-einstein",
+      "name": "Albert Einstein",
+      "description": "Theoretical physicist",
+      "answers": {
+        "real": "yes",
+        "human": "yes",
+        "heroic": "maybe",
+        "powers": "no",
+        "franchise": "no",
+        "tech": "maybe",
+        "historical": "no",
+        "animated": "no",
+        "mask": "no"
+      }
+    },
+    {
+      "id": "darth-vader",
+      "name": "Darth Vader",
+      "description": "Sith Lord from Star Wars",
+      "answers": {
+        "real": "no",
+        "human": "maybe",
+        "heroic": "no",
+        "powers": "yes",
+        "franchise": "yes",
+        "tech": "yes",
+        "historical": "no",
+        "animated": "maybe",
+        "mask": "yes"
+      }
+    },
+    {
+      "id": "cleopatra",
+      "name": "Cleopatra",
+      "description": "Queen of the Ptolemaic Kingdom",
+      "answers": {
+        "real": "yes",
+        "human": "yes",
+        "heroic": "maybe",
+        "powers": "no",
+        "franchise": "no",
+        "tech": "no",
+        "historical": "yes",
+        "animated": "no",
+        "mask": "no"
+      }
+    }
+  ]
+}
