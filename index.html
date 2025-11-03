@@ -23,80 +23,79 @@
 
         <div id="question" class="game__question">Loading knowledge…</div>
 
-        <div class="game__actions">
-          <button class="btn" data-answer="yes">Yes</button>
-          <button class="btn" data-answer="no">No</button>
-          <button class="btn" data-answer="maybe">Unsure</button>
-        </div>
-
         <div id="narration" class="game__narration" aria-live="polite"></div>
 
-        <div id="guess-area" class="guess" hidden>
-          <h2 id="guess-text"></h2>
-          <div class="guess__actions">
-            <button id="guess-correct" class="btn btn--primary">Correct</button>
-            <button id="guess-incorrect" class="btn">Not quite</button>
+        <div class="flow">
+          <div id="step-question" class="flow__stage">
+            <div class="game__actions">
+              <button class="btn" data-answer="yes">Yes</button>
+              <button class="btn" data-answer="no">No</button>
+              <button class="btn" data-answer="maybe">Unsure</button>
+            </div>
+          </div>
+
+          <div id="step-guess" class="flow__stage" hidden>
+            <div class="guess__actions">
+              <button id="guess-correct" class="btn btn--primary">Correct</button>
+              <button id="guess-incorrect" class="btn">Not quite</button>
+            </div>
+          </div>
+
+          <div id="step-reveal" class="flow__stage" hidden>
+            <form id="reveal-form" class="card">
+              <h3>Who was your character?</h3>
+              <label class="field">
+                <span>Name</span>
+                <input type="text" name="revealedName" placeholder="e.g. Wonder Woman" required />
+              </label>
+              <label class="field">
+                <span>Where are they from?</span>
+                <input type="text" name="revealedOrigin" placeholder="Franchise, story, or reality" />
+              </label>
+              <label class="field">
+                <span>Fun fact (optional)</span>
+                <textarea name="revealedNotes" rows="3" placeholder="Any detail that stands out"></textarea>
+              </label>
+            </form>
+            <button id="reveal-continue" class="btn btn--primary flow__next">Continue</button>
+          </div>
+
+          <div id="step-suggest" class="flow__stage" hidden>
+            <form id="new-character-form" class="card">
+              <h3>Suggest a New Character</h3>
+              <p class="card__help">
+                The more threads the Spider knows, the faster it can ensnare the truth.
+              </p>
+              <label class="field">
+                <span>Character name</span>
+                <input type="text" name="name" placeholder="Name" />
+              </label>
+              <label class="field">
+                <span>Short description</span>
+                <textarea name="description" rows="2" placeholder="Why are they notable?"></textarea>
+              </label>
+              <div class="field">
+                <span>Known answers</span>
+                <div id="new-character-answers" class="field__grid"></div>
+              </div>
+            </form>
+
+            <form id="new-question-form" class="card">
+              <h3>Suggest a New Question</h3>
+              <label class="field">
+                <span>Question text</span>
+                <input type="text" name="text" placeholder="Does your character…" />
+              </label>
+              <label class="field">
+                <span>Help the Spider learn</span>
+                <div id="new-question-characters" class="field__grid"></div>
+              </label>
+            </form>
+
+            <button id="finish-session" class="btn btn--primary flow__next">Share with the Web</button>
+            <p id="submit-status" class="summary__status" role="status"></p>
           </div>
         </div>
-      </section>
-
-      <section id="summary" class="summary" hidden>
-        <h2>Spin the Web Wider</h2>
-        <p>
-          Help the Spider grow wiser! Confirm the true character, add fresh faces, or weave new questions for future seekers.
-        </p>
-
-        <form id="reveal-form" class="card">
-          <h3>Who was your character?</h3>
-          <label class="field">
-            <span>Name</span>
-            <input type="text" name="revealedName" placeholder="e.g. Wonder Woman" required />
-          </label>
-          <label class="field">
-            <span>Where are they from?</span>
-            <input type="text" name="revealedOrigin" placeholder="Franchise, story, or reality" />
-          </label>
-          <label class="field">
-            <span>Fun fact (optional)</span>
-            <textarea name="revealedNotes" rows="3" placeholder="Any detail that stands out"></textarea>
-          </label>
-        </form>
-
-        <form id="new-character-form" class="card">
-          <h3>Suggest a New Character</h3>
-          <p class="card__help">
-            The more threads the Spider knows, the faster it can ensnare the truth.
-          </p>
-          <label class="field">
-            <span>Character name</span>
-            <input type="text" name="name" placeholder="Name" />
-          </label>
-          <label class="field">
-            <span>Short description</span>
-            <textarea name="description" rows="2" placeholder="Why are they notable?"></textarea>
-          </label>
-          <div class="field">
-            <span>Known answers</span>
-            <div id="new-character-answers" class="field__grid"></div>
-          </div>
-        </form>
-
-        <form id="new-question-form" class="card">
-          <h3>Suggest a New Question</h3>
-          <label class="field">
-            <span>Question text</span>
-            <input type="text" name="text" placeholder="Does your character…" />
-          </label>
-          <label class="field">
-            <span>Help the Spider learn</span>
-            <div id="new-question-characters" class="field__grid"></div>
-          </label>
-        </form>
-
-        <button id="submit-session" class="btn btn--primary summary__submit">
-          Send insights to the Web of Knowledge
-        </button>
-        <p id="submit-status" class="summary__status" role="status"></p>
       </section>
     </main>
 
