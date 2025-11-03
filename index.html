@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>The Spider of Lore</title>
+    <link rel="stylesheet" href="./web-of-knowledge/src/style.css" />
+  </head>
+  <body>
+    <main class="app">
+      <header class="app__header">
+        <h1>🕷️ The Spider of Lore</h1>
+        <p class="app__tagline">
+          Whisper the details of your character and let the web tighten around the truth.
+        </p>
+      </header>
+
+      <section id="game" class="game">
+        <div class="game__status">
+          <div id="question-counter" class="chip">Question 0 / 24</div>
+          <div id="guess-counter" class="chip">Guesses left: 3</div>
+        </div>
+
+        <div id="question" class="game__question">Loading knowledge…</div>
+
+        <div class="game__actions">
+          <button class="btn" data-answer="yes">Yes</button>
+          <button class="btn" data-answer="no">No</button>
+          <button class="btn" data-answer="maybe">Unsure</button>
+        </div>
+
+        <div id="narration" class="game__narration" aria-live="polite"></div>
+
+        <div id="guess-area" class="guess" hidden>
+          <h2 id="guess-text"></h2>
+          <div class="guess__actions">
+            <button id="guess-correct" class="btn btn--primary">Correct</button>
+            <button id="guess-incorrect" class="btn">Not quite</button>
+          </div>
+        </div>
+      </section>
+
+      <section id="summary" class="summary" hidden>
+        <h2>Spin the Web Wider</h2>
+        <p>
+          Help the Spider grow wiser! Confirm the true character, add fresh faces, or weave new questions for future seekers.
+        </p>
+
+        <form id="reveal-form" class="card">
+          <h3>Who was your character?</h3>
+          <label class="field">
+            <span>Name</span>
+            <input type="text" name="revealedName" placeholder="e.g. Wonder Woman" required />
+          </label>
+          <label class="field">
+            <span>Where are they from?</span>
+            <input type="text" name="revealedOrigin" placeholder="Franchise, story, or reality" />
+          </label>
+          <label class="field">
+            <span>Fun fact (optional)</span>
+            <textarea name="revealedNotes" rows="3" placeholder="Any detail that stands out"></textarea>
+          </label>
+        </form>
+
+        <form id="new-character-form" class="card">
+          <h3>Suggest a New Character</h3>
+          <p class="card__help">
+            The more threads the Spider knows, the faster it can ensnare the truth.
+          </p>
+          <label class="field">
+            <span>Character name</span>
+            <input type="text" name="name" placeholder="Name" />
+          </label>
+          <label class="field">
+            <span>Short description</span>
+            <textarea name="description" rows="2" placeholder="Why are they notable?"></textarea>
+          </label>
+          <div class="field">
+            <span>Known answers</span>
+            <div id="new-character-answers" class="field__grid"></div>
+          </div>
+        </form>
+
+        <form id="new-question-form" class="card">
+          <h3>Suggest a New Question</h3>
+          <label class="field">
+            <span>Question text</span>
+            <input type="text" name="text" placeholder="Does your character…" />
+          </label>
+          <label class="field">
+            <span>Help the Spider learn</span>
+            <div id="new-question-characters" class="field__grid"></div>
+          </label>
+        </form>
+
+        <button id="submit-session" class="btn btn--primary summary__submit">
+          Send insights to the Web of Knowledge
+        </button>
+        <p id="submit-status" class="summary__status" role="status"></p>
+      </section>
+    </main>
+
+    <template id="option-template">
+      <label class="field field--inline">
+        <span class="field__label"></span>
+        <select>
+          <option value="unknown">Unknown</option>
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
+          <option value="maybe">Maybe</option>
+        </select>
+      </label>
+    </template>
+
+    <script src="./web-of-knowledge/src/game.js" type="module"></script>
+  </body>
+</html>

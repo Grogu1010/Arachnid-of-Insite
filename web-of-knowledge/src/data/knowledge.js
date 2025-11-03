@@ -1,4 +1,4 @@
-{
+export const knowledge = {
   "questions": [
     {
       "id": "real",
@@ -129,3 +129,4 @@
     }
   ]
 }
+;

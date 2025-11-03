@@ -12,19 +12,21 @@ web-of-knowledge/
 ├── netlify.toml                # Netlify build + redirects configuration
 └── src/
     ├── data/
-    │   └── knowledge.json      # Seed questions and character fingerprints
+    │   └── knowledge.js        # Seed questions and character fingerprints
     ├── game.js                 # Client-side inference + UI orchestration
-    ├── index.html              # Application shell
+    ├── index.html              # Application shell for Netlify deploys
     └── style.css               # Frosted-glass inspired styling
+
+The repository root also contains an `index.html` that wires the same shell to the module-based assets for offline use.
 ```
 
 ## Getting started
 
-1. Install dependencies for local development (a static server is enough):
+1. Open `index.html` in your browser, or serve the repository root with any static file server if you prefer a local URL:
 
    ```bash
-   npm install -g serve # or any static file server you prefer
-   serve web-of-knowledge/src
+   python3 -m http.server 3000
+   # then visit http://localhost:3000/
    ```
 
 2. In Netlify, configure the required environment variables so the logging function can commit to GitHub:
@@ -43,4 +45,4 @@ web-of-knowledge/
 - After at most 24 questions the Spider offers up to three guesses. Whether correct or not, players can reveal the true character, suggest new characters, and propose new questions.
 - The entire session (answers, guesses, and player contributions) is sent to the Netlify Function which archives it inside the repository under `data/session-<timestamp>.json`.
 
-Future enhancements could expand the `knowledge.json` seed set, analyse the archived sessions to refine probabilities, and dynamically grow the question bank.
+Future enhancements could expand the `knowledge.js` seed set, analyse the archived sessions to refine probabilities, and dynamically grow the question bank.
