@@ -12,7 +12,7 @@ web-of-knowledge/
 ├── netlify.toml                # Netlify build + redirects configuration
 └── src/
     ├── data/
-    │   └── knowledge.json      # Seed questions and character fingerprints
+    │   └── knowledge.js        # Seed questions and character fingerprints
     ├── game.js                 # Client-side inference + UI orchestration
     ├── index.html              # Application shell
     └── style.css               # Frosted-glass inspired styling
@@ -43,4 +43,4 @@ web-of-knowledge/
 - After at most 24 questions the Spider offers up to three guesses. Whether correct or not, players can reveal the true character, suggest new characters, and propose new questions.
 - The entire session (answers, guesses, and player contributions) is sent to the Netlify Function which archives it inside the repository under `data/session-<timestamp>.json`.
 
-Future enhancements could expand the `knowledge.json` seed set, analyse the archived sessions to refine probabilities, and dynamically grow the question bank.
+Future enhancements could expand the `knowledge.js` seed set, analyse the archived sessions to refine probabilities, and dynamically grow the question bank.

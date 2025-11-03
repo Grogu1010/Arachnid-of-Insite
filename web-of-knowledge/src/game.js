@@ -1,3 +1,5 @@
+import { knowledge as knowledgeSeed } from "./data/knowledge.js";
+
 const MAX_QUESTIONS = 24;
 const MAX_GUESSES = 3;
 const CONFIDENCE_THRESHOLD = 0.62;
@@ -49,10 +51,9 @@ const state = {
 
 async function loadKnowledge() {
   try {
-    const res = await fetch("./data/knowledge.json", { cache: "no-store" });
-    if (!res.ok) throw new Error(`Failed to load knowledge (${res.status})`);
-    const knowledge = await res.json();
-    state.knowledge = knowledge;
+    // Clone the imported seed so the running session can mutate it freely
+    // without affecting future sessions or hot-module reloads.
+    state.knowledge = JSON.parse(JSON.stringify(knowledgeSeed));
     initialiseProbabilities();
     buildSuggestionForms();
     askNextQuestion();
